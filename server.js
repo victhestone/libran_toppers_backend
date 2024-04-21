@@ -1,10 +1,10 @@
 import express from 'express';
-import db from './src/db/db.js';
 import routes, { unVerifiedRoutes } from './src/routes/index.js';
 import dotenv from "dotenv";
 import cors from 'cors';
 import { verifyToken } from './src/db/verifyToken.js';
 import { rateLimit } from 'express-rate-limit';
+import mongoose from 'mongoose';
 
 dotenv.config();
 
@@ -25,7 +25,8 @@ app.use(limiter)
 routes.forEach(route => {
     app[route.method](route.path, verifyToken, async (req, res) => {
         if(!req.user) {
-            res.status(403).send({ message: "Invalid JWT token" })
+            res.status(403).send({ message: "Invalid JWT token" });
+            return;
         }
         return route.handler(req, res);
     });
@@ -38,11 +39,13 @@ unVerifiedRoutes.forEach(route => {
 const dBConnectionString = process.env.COSMOS_BOOKSTORE_DB_CONNECTION_STRING || "";
 const PORT = process.env.PORT || 8080;
 
-db.connect(dBConnectionString)
-    .catch(err => {
-        console.error(err.stack);
-        process.exit(1)
-    })
-    .then(app.listen(PORT, () => {
+mongoose.connect(dBConnectionString, { useNewUrlParser: true });
+mongoose.connection.once('open', function(){
+    console.log('Database connected Successfully');
+    app.listen(PORT, () => {
         console.log(`Server is running on port ${PORT}`);
-    }));
+    })
+}).on('error',function(err){
+    console.log('Error', err);
+});
+

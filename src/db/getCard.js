@@ -1,9 +1,7 @@
-import  db  from './db.js';
+import CardModel from "../models/card.js";
 
 const getCard = async (cardId) => {
-    const connection = db.getConnection();
-    // Query one document that matches the particular criteria
-    const card = await connection.collection('cards').findOne({"id": cardId })
+    const card = await CardModel.findOne({"id": cardId })
     return card;
 }
 export default getCard

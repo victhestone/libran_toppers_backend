@@ -5,8 +5,14 @@ const signUpRoute = {
     path: '/signup',
     handler: async (req, res) => {
         const user = req.body;
-        await signUp(user);
-        res.status(200).json(user);
+        try {
+            await signUp(user);
+            res.status(200).json(user);
+        } catch (error) {
+            console.error(error)
+            res.status(500);
+        }
+        
     }
 }
 

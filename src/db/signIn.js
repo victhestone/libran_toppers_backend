@@ -1,10 +1,9 @@
-import db from './db.js';
 import jwt from 'jsonwebtoken';
 import bcrypt from 'bcrypt';
+import { UserModel } from '../models/user.js';
 
 export const signIn = async (receivedUser) => {
-    const connection = db.getConnection();
-    const user = await connection.collection('users').findOne({"email": receivedUser.email });
+    const user = await UserModel.findOne({ "email": receivedUser.email });
     
     const passwordIsValid = bcrypt.compareSync(receivedUser.password, user.password);
 

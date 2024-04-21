@@ -1,9 +1,7 @@
-import db from './db.js';
+import CardModel from "../models/card.js";
 
 async function getAllCards() {
-    const connection = db.getConnection();
-    const cursor = await connection.collection('cards').find();
-    const cards = await cursor.toArray();
+    const cards = await CardModel.find({});
     return cards;
 }
 

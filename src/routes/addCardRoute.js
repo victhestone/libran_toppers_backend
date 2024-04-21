@@ -5,8 +5,14 @@ import addCard from '../db/addCard.js';
     path: '/cards',
     handler: async (req, res) => {
         const newCard = req.body;
-        const card = await addCard(newCard);
-        res.status(200).json(card);
+        try {
+            const card = await addCard(newCard);
+            res.status(200).json(card);  
+        } catch (error) {
+            console.error(error)
+            res.status(500);
+        }
+        
     }
 }
 export default addCardRoute
