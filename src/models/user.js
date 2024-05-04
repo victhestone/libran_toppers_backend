@@ -1,5 +1,20 @@
 import mongoose from "mongoose"
 
+const BoosterPackSchema = new mongoose.Schema({
+    id: {
+        type: String,
+        required: true,
+      },
+    name: {
+        type: String,
+        required: true,
+    },
+    amount: {
+        type: Number,
+        required: true,
+    },
+});
+
 const UserSchema = new mongoose.Schema({
     id: {
         type: String,
@@ -23,7 +38,7 @@ const UserSchema = new mongoose.Schema({
         required: true
     },
     boosterPacks: {
-        type: Number,
+        type: [BoosterPackSchema],
         required: true,
     },
     starterPacks: {

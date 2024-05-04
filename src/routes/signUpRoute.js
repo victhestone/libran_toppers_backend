@@ -1,5 +1,14 @@
 import { signUp } from '../db/signUp.js';
 
+/**
+ * @openapi
+ * /signup:
+ *   post:
+ *     description: Create a new user
+ *     responses:
+ *       200:
+ *         description: the newly created user
+ */
 const signUpRoute = {
     method: 'post',
     path: '/signup',

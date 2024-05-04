@@ -1,5 +1,14 @@
 import getCard from '../db/getCard.js';
 
+/**
+ * @openapi
+ * /cards/:id:
+ *   get:
+ *     description: Get a specific card
+ *     responses:
+ *       200:
+ *         description: Returns a card
+ */
  const getCardRoute = {
     method: 'get',
     path: '/cards/:id',

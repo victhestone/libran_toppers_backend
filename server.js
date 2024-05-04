@@ -5,6 +5,31 @@ import cors from 'cors';
 import { verifyToken } from './src/db/verifyToken.js';
 import { rateLimit } from 'express-rate-limit';
 import mongoose from 'mongoose';
+import swaggerUi from 'swagger-ui-express';
+import swaggerJSDoc from 'swagger-jsdoc';
+
+const options = {
+    definition: {
+      openapi: '3.0.1',
+      info: {
+        title: 'libran_toppers_backend',
+        version: '1.0.0',
+      },
+      components: {
+            securitySchemes: {
+                bearerAuth: {
+                    type: 'http',
+                    scheme: 'bearer',
+                    bearerFormat: 'JWT',
+                }
+            }
+        },
+        security: [{
+            bearerAuth: []
+        }],
+    },
+    apis: ['./src/routes/*.js'], // files containing annotations as above
+  };
 
 dotenv.config();
 
@@ -20,7 +45,9 @@ const app = express();
 app.use(express.json())
 app.use(express.urlencoded({ extended: true }))
 app.use(cors());
-app.use(limiter)
+app.use(limiter);
+const swaggerSpec = swaggerJSDoc(options);
+app.use('/api-docs', swaggerUi.serve, swaggerUi.setup(swaggerSpec));
 
 routes.forEach(route => {
     app[route.method](route.path, verifyToken, async (req, res) => {

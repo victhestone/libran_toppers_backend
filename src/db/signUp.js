@@ -8,7 +8,21 @@ export const signUp = async (user) => {
         email: user.email,
         password: bcrypt.hashSync(user.password, 8),
         cardCollection: JSON.stringify([]),
-        boosterPacks: 0,
+        boosterPacks: [{
+            id: "gothurial",
+            name: "Gothurian Pack",
+            amount: 0
+        }, 
+        {
+            id: 'lucarian',
+            name: "Lucarian Pack",
+            amount: 0
+        },
+        {
+            id: "neutral",
+            name: "Neutral Pack",
+            amount: 0
+        }],
         starterPacks: [],
         isAdmin: false
     })

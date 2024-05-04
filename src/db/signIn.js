@@ -14,7 +14,7 @@ export const signIn = async (receivedUser) => {
     const token = jwt.sign({
         id: user.id
       }, process.env.API_SECRET, {
-        expiresIn: 86400
+        expiresIn: '7d'
     });
 
     return { user, token };

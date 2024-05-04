@@ -1,5 +1,14 @@
 import updateUser from '../db/updateUser.js';
 
+/**
+ * @openapi
+ * /users/:id:
+ *   patch:
+ *     description: Update a field of a user
+ *     responses:
+ *       200:
+ *         description: updated user
+ */
  const updateUserRoute = {
     method: 'patch',
     path: '/users/:id',
@@ -7,7 +16,8 @@ import updateUser from '../db/updateUser.js';
         const { id } = req.params;
 
         if(id !== req.user.id && !req.user?.isAdmin) {
-            res.status(403).send({ message: "Cant update other users" })
+            res.status(403).send({ message: "Cant update other users" });
+            return;
         }
         const newUser = req.body;
         try {

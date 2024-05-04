@@ -1,5 +1,14 @@
 import {signIn} from '../db/signIn.js';
 
+/**
+ * @openapi
+ * /signin:
+ *   post:
+ *     description: Sign in the user
+ *     responses:
+ *       200:
+ *         description: the user with a jwt
+ */
  const signInRoute = {
     method: 'post',
     path: '/signin',

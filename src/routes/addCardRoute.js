@@ -1,8 +1,17 @@
 import addCard from '../db/addCard.js';
 
+/**
+ * @openapi
+ * /card:
+ *   post:
+ *     description: Add a card
+ *     responses:
+ *       200:
+ *         description: Returns the newly created card
+ */
  const addCardRoute = {
     method: 'post',
-    path: '/cards',
+    path: '/card',
     handler: async (req, res) => {
         const newCard = req.body;
         try {

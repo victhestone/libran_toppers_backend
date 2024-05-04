@@ -28,8 +28,8 @@ const CardSchema = new mongoose.Schema({
         type: String,
         required: true,
     },
-    faction: {
-        type: String,
+    factions: {
+        type: [String],
         required: true,
     },
     alignment: {

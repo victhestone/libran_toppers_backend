@@ -5,7 +5,7 @@ const addCard = async (card) => {
         id: card.id,
         name: card.name,
         type: card.type,
-        faction: card.faction,
+        factions: card.factions,
         alignment: card.alignment,
         red: card.red,
         blue: card.blue,
