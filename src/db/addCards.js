@@ -14,7 +14,8 @@ const addCards = async (cards) => {
             blue: card.blue,
             quote: card.quote,
             abilities: card.abilities,
-            version: card.version
+            version: card.version,
+            isTemp: card.isTemp
         });
         cardArray.push(toAddCard)
     })

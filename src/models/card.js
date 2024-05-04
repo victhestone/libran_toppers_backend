@@ -54,6 +54,10 @@ const CardSchema = new mongoose.Schema({
     version: {
         type: Number,
         required: true,
+    },
+    isTemp: {
+        type: Boolean,
+        required: false,
     }
   });
 

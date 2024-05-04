@@ -11,7 +11,8 @@ const addCard = async (card) => {
         blue: card.blue,
         quote: card.quote,
         abilities: card.abilities,
-        version: card.version
+        version: card.version,
+        isTemp: card.isTemp
     })
     await toAddCard.save();
 }
